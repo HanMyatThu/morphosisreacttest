@@ -1,10 +1,18 @@
-import * as React from 'react';
+import * as React from "react";
+import Header from "./components/header/header";
+import { Switch, Route, Redirect } from "react-router-dom";
+
+import HomePage from "./page/homepage/homepage";
+import CheckoutPage from "./page/checkout/checkout";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Robot Market</h1>
-      {/*Add your code here*/}
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
+      </Switch>
     </div>
   );
 }
