@@ -2,13 +2,21 @@ export const addItemsToCart = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
     (item) => cartItemToAdd.name === item.name
   );
-
   if (existingCartItem) {
-    return cartItems.map((item) =>
-      cartItemToAdd.name === item.name
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
-    );
+    return cartItems.map((item) => {
+      if (cartItemToAdd.name === item.name) {
+        if (item.quantity >= cartItemToAdd.stock) {
+          alert("Item is out of stock");
+        } else {
+          return { ...item, quantity: item.quantity + 1 };
+        }
+      }
+      return item;
+    });
+  }
+  if (cartItemToAdd.stock <= 0) {
+    alert("Item is out of stock");
+    return cartItems;
   }
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };

@@ -11,6 +11,10 @@ import "./checkout-items.scss";
 
 const CheckoutItem = ({ item, clearItem, addItem, removeItem }) => {
   const { name, image, price, quantity, stock } = item;
+  const changeCurrency = (price) => {
+    let thaiBaht = price * 31.22;
+    return thaiBaht.toFixed();
+  };
   return (
     <div className="checkout-item">
       <div className="image-container">
@@ -26,8 +30,7 @@ const CheckoutItem = ({ item, clearItem, addItem, removeItem }) => {
           &#10095;
         </div>
       </span>
-      <span className="price">{price}</span>
-      <span>{stock}</span>
+      <span className="price">฿ {changeCurrency(price)}</span>
       <div className="remove-button" onClick={() => clearItem(item)}>
         &#10005;
       </div>

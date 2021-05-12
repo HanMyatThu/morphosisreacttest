@@ -11,14 +11,13 @@ import CartDropDown from "../cart-dropdown/cart-dropdown";
 
 const Header = ({ hidden }) => {
   return (
-    <div className="header">
+    <div className="header" id="top">
       <Link className="logo-container" to="/">
         <Logo className="logo" />
       </Link>
       <div className="options">
         <CartIcon></CartIcon>
       </div>
-
       {hidden ? null : <CartDropDown></CartDropDown>}
     </div>
   );

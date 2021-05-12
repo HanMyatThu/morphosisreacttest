@@ -12,6 +12,11 @@ import {
 } from "../../redux/cart/cart-selector";
 
 const CheckOut = ({ cartItems, total }) => {
+  const changeCurrency = (price) => {
+    let thaiBaht = price * 31.22;
+    return thaiBaht.toFixed();
+  };
+
   return (
     <div className="checkout-page">
       <div className="checkout-header">
@@ -19,7 +24,7 @@ const CheckOut = ({ cartItems, total }) => {
           <span>Products</span>
         </div>
         <div className="header-block">
-          <span>Descriptions</span>
+          <span>Name</span>
         </div>
         <div className="header-block">
           <span>Quantity</span>
@@ -37,7 +42,15 @@ const CheckOut = ({ cartItems, total }) => {
       ))}
 
       <div className="total">
-        <span>Total: ${total}</span>
+        <span>Total: ฿ {changeCurrency(total)}</span>
+      </div>
+      <div className="row checkout">
+        <button
+          onClick={(e) => alert("Checkout Feature is not available yet")}
+          className="btn btn-secondary"
+        >
+          Checkout
+        </button>
       </div>
     </div>
   );

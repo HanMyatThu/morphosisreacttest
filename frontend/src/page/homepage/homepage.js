@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./homepage.scss";
-import PreviewCollection from "../../components/preview-collection/preview-collection.js";
 import axios from "axios";
 
-const HomePage = () => {
-  const [shopData, setShopData] = useState([]);
+import { connect } from "react-redux";
+import PreviewCollection from "../../components/preview-collection/preview-collection.js";
+import { fetchData } from "../../redux/collection/colllection-action";
+import { createStructuredSelector } from "reselect";
+import { selectCollectionItems } from "../../redux/collection/collection-selector";
 
+const HomePage = ({ fetchData, robotsData }) => {
   useEffect(() => {
-    async function fetchData() {
-      const { data } = await axios.get("http://localhost:8000/api/robots");
-      setShopData(data.data);
-    }
     fetchData();
   }, []);
-
   return (
     <div className="home-page">
       <div className="container">
-        <h2 className="mb-4">Robots</h2>
-        <div className="row mt-2">
-          {shopData.map((item, idx) => (
-            <PreviewCollection key={idx} item={item} />
+        <h2 className="mb-4 text-center">ROBOTS</h2>
+        <div className="row">
+          {robotsData.map((collection, idx) => (
+            <PreviewCollection key={idx} item={collection}></PreviewCollection>
           ))}
         </div>
       </div>
@@ -28,4 +26,12 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+const mapDispatchToProps = (dispatch) => ({
+  fetchData: () => dispatch(fetchData()),
+});
+
+const mapStateToProps = createStructuredSelector({
+  robotsData: selectCollectionItems,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

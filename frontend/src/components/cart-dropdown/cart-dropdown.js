@@ -23,14 +23,15 @@ const CartDropdown = ({ cartItems, dispatch }) => {
           </div>
         )}
       </div>
-      <CustomButton
+      <button
+        className="btn btn-secondary"
         onClick={() => {
           history.push("/checkout");
           dispatch(cartToggle());
         }}
       >
         GO TO CHECKOUT
-      </CustomButton>
+      </button>
     </div>
   );
 };
