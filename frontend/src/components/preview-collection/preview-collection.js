@@ -8,7 +8,8 @@ import { addItemsToCart } from "../../redux/cart/cart-action";
 const PreviewCollection = ({ item, addItemsToCart }) => {
   const changeCurrency = (price) => {
     let thaiBaht = price * 31.22;
-    return thaiBaht.toFixed();
+    thaiBaht = thaiBaht.toFixed();
+    return thaiBaht.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
   const dateFormat = (date) => {
     date = new Date(date);

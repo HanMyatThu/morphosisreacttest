@@ -13,7 +13,8 @@ const CheckoutItem = ({ item, clearItem, addItem, removeItem }) => {
   const { name, image, price, quantity, stock } = item;
   const changeCurrency = (price) => {
     let thaiBaht = price * 31.22;
-    return thaiBaht.toFixed();
+    thaiBaht = thaiBaht.toFixed();
+    return thaiBaht.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
   return (
     <div className="checkout-item">
